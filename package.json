@@ -1,5 +1,5 @@
 {
-  "name": "vue-infinite",
+  "name": "@dadajam4/vue-infinite",
   "version": "0.4.1",
   "description": "Infinite scroll support based on vue 2 (SSR support)",
   "main": "dist/vue-infinite.common.js",
