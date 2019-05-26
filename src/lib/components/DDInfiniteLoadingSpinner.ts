@@ -5,8 +5,6 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
   name: 'dd-infinite-loading-spinner',
 })
 export default class DDInfiniteLoadingSpinner extends Vue {
-  $style!: { [key: string]: string };
-
   @Prop(Boolean) button!: boolean;
   @Prop(Boolean) indeterminate!: boolean;
   @Prop({ type: [Number, String], default: 0 }) rotate!: number | string;
@@ -24,9 +22,8 @@ export default class DDInfiniteLoadingSpinner extends Vue {
 
   get classes(): object {
     return {
-      [this.$style['dd-infinite-loading-spinner--indeterminate']]: this
-        .indeterminate,
-      [this.$style['dd-infinite-loading-spinner--button']]: this.button,
+      'vil-infinite-loading-spinner--indeterminate': this.indeterminate,
+      'vil-infinite-loading-spinner--button': this.button,
     };
   }
 
@@ -81,7 +78,7 @@ export default class DDInfiniteLoadingSpinner extends Vue {
     offset: string | number,
   ): VNode {
     return h('circle', {
-      class: this.$style[`dd-infinite-loading-spinner__${name}`],
+      class: `vil-infinite-loading-spinner__${name}`,
       attrs: {
         fill: 'transparent',
         cx: 2 * this.viewBoxSize,
@@ -117,7 +114,7 @@ export default class DDInfiniteLoadingSpinner extends Vue {
   protected render(h: CreateElement): VNode {
     const info = h(
       'div',
-      { staticClass: this.$style['dd-infinite-loading-spinner__info'] },
+      { staticClass: 'vil-infinite-loading-spinner__info' },
       this.$slots.default,
     );
     const svg = this.genSvg(h);
@@ -125,7 +122,7 @@ export default class DDInfiniteLoadingSpinner extends Vue {
     return h(
       'div',
       {
-        staticClass: this.$style['dd-infinite-loading-spinner'],
+        staticClass: 'vil-infinite-loading-spinner',
         attrs: {
           role: 'progressbar',
           'aria-valuemin': 0,

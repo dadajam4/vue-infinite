@@ -1,7 +1,7 @@
 import { CreateElement, VNode } from 'vue';
 import { Component, Prop, Model, Vue } from 'vue-property-decorator';
 import DDInfinitePage from './DDInfinitePage';
-import DDInfiniteLoading from './DDInfiniteLoading.vue';
+import DDInfiniteLoading from './DDInfiniteLoading';
 import Scroller from '@dadajam4/scroller';
 import { isPromise, toNumber, error } from '../utils';
 

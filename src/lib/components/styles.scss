@@ -1,10 +1,10 @@
-.dd-infinite-loading {
+.vil-infinite-loading {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.dd-infinite-loading-spinner {
+.vil-infinite-loading-spinner {
   position: relative;
   display: inline-flex;
   vertical-align: middle;
@@ -23,13 +23,13 @@
 
   &--indeterminate {
     svg {
-      animation: dd-infinite-loading-spinner-rotate 1.4s linear infinite;
+      animation: vil-infinite-loading-spinner-rotate 1.4s linear infinite;
       transform-origin: center center;
       transition: all 0.2s ease-in-out;
     }
 
-    .dd-infinite-loading-spinner__overlay {
-      animation: dd-infinite-loading-spinner-dash 1.4s ease-in-out infinite;
+    .vil-infinite-loading-spinner__overlay {
+      animation: vil-infinite-loading-spinner-dash 1.4s ease-in-out infinite;
       stroke-linecap: round;
       stroke-dasharray: 80, 200;
       stroke-dashoffset: 0px;
@@ -55,7 +55,7 @@
   }
 }
 
-@keyframes dd-infinite-loading-spinner-dash {
+@keyframes vil-infinite-loading-spinner-dash {
   0% {
     stroke-dasharray: 1, 200;
     stroke-dashoffset: 0px;
@@ -72,7 +72,7 @@
   }
 }
 
-@keyframes dd-infinite-loading-spinner-rotate {
+@keyframes vil-infinite-loading-spinner-rotate {
   100% {
     transform: rotate(360deg);
   }

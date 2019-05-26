@@ -1,6 +1,6 @@
 import { CreateElement } from 'vue';
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import DDInfiniteLoadingSpinner from './DDInfiniteLoadingSpinner.vue';
+import DDInfiniteLoadingSpinner from './DDInfiniteLoadingSpinner';
 
 const MIN_SPINNER_HEIGHT = 32;
 
@@ -8,8 +8,6 @@ const MIN_SPINNER_HEIGHT = 32;
   name: 'dd-infinite-loading',
 })
 export default class DDInfiniteLoading extends Vue {
-  $style!: { [key: string]: string };
-
   @Prop({ type: String, required: true }) type!: string;
   @Prop({ type: String, default: 'div' }) tag!: string;
   @Prop({ type: String }) color?: string;
@@ -56,7 +54,7 @@ export default class DDInfiniteLoading extends Vue {
     return h(
       this.tag,
       {
-        staticClass: this.$style['dd-infinite-loading'],
+        staticClass: 'vil-infinite-loading',
         style: this.styles,
       },
       children,

@@ -1,9 +1,6 @@
 import { CreateElement, VNode } from 'vue';
 import { Vue } from 'vue-property-decorator';
 export default class DDInfiniteLoadingSpinner extends Vue {
-    $style: {
-        [key: string]: string;
-    };
     button: boolean;
     indeterminate: boolean;
     rotate: number | string;

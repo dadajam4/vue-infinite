@@ -1,7 +1,7 @@
 import { CreateElement, VNode } from 'vue';
 import { Vue } from 'vue-property-decorator';
 import DDInfinitePage from './DDInfinitePage';
-import DDInfiniteLoading from './DDInfiniteLoading.vue';
+import DDInfiniteLoading from './DDInfiniteLoading';
 import Scroller from '@dadajam4/scroller';
 export declare type LoadingType = 'prev' | 'next';
 export interface DebounceDefine {

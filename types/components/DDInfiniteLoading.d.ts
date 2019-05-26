@@ -1,9 +1,6 @@
 import { CreateElement } from 'vue';
 import { Vue } from 'vue-property-decorator';
 export default class DDInfiniteLoading extends Vue {
-    $style: {
-        [key: string]: string;
-    };
     type: string;
     tag: string;
     color?: string;
