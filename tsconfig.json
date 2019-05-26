@@ -22,5 +22,6 @@
     },
     "typeRoots": ["node_modules/@types", "node_modules/@nuxt/vue-app"],
     "types": ["@types/node", "@nuxt/vue-app"]
-  }
+  },
+  "exclude": ["types"]
 }
