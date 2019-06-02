@@ -20,17 +20,19 @@ export interface RequestTarget {
   scroll: DDInfiniteScroll;
 }
 
-export type RequestResult = PageData | void;
+export type RequestResult<M = any> = PageData<M> | void;
 
-export type DDInfiniteScrollRequest = (target: RequestTarget) => RequestResult;
+export type DDInfiniteScrollRequest<M = any> = (
+  target: RequestTarget,
+) => RequestResult<M>;
 
-export interface PageData {
+export interface PageData<M = any> {
   page: number;
-  data?: any;
+  data?: M;
   finished?: boolean;
 }
 
-export interface ComputedPageData extends PageData {
+export interface ComputedPageData<M = any> extends PageData<M> {
   active: boolean;
 }
 
@@ -47,7 +49,7 @@ export const MIN_DEBOUNCE = 0;
 @Component({
   name: 'dd-infinite-scroll',
 })
-export default class DDInfiniteScroll extends Vue {
+export default class DDInfiniteScroll<M = any> extends Vue {
   $refs!: {
     pages: DDInfinitePage[];
     prevLoading: DDInfiniteLoading;
@@ -68,7 +70,7 @@ export default class DDInfiniteScroll extends Vue {
     },
   })
   scroller!: Scroller;
-  @Model('update:pages', { type: Array, required: true }) pages!: PageData[];
+  @Model('update:pages', { type: Array, required: true }) pages!: PageData<M>[];
   @Prop({ type: Number, default: 1 }) page!: number;
   @Prop({ type: String, default: 'div' }) tag!: string;
   @Prop({ type: String }) pageTag?: string;
@@ -97,11 +99,11 @@ export default class DDInfiniteScroll extends Vue {
   @Prop({ type: Function, required: true }) request!: DDInfiniteScrollRequest;
   @Prop({ type: [Number, String] }) maxActivePage?: number | string;
 
-  get computedActivePages(): ComputedPageData[] {
+  get computedActivePages(): ComputedPageData<M>[] {
     return this.computedPages.filter(p => p.active);
   }
 
-  get computedPages(): ComputedPageData[] {
+  get computedPages(): ComputedPageData<M>[] {
     const { computedMaxActivePage, currentPage } = this;
 
     const pages = this.pages.sort((a, b) => {
@@ -220,7 +222,7 @@ export default class DDInfiniteScroll extends Vue {
     return this.innerPaused;
   }
 
-  pageAt(page: number): ComputedPageData | undefined {
+  pageAt(page: number): ComputedPageData<M> | undefined {
     return this.computedPages.find(p => p.page === page);
   }
 
@@ -235,7 +237,7 @@ export default class DDInfiniteScroll extends Vue {
   private requestErrors: { prev: any; next: any } = { prev: null, next: null };
   private innerPaused: boolean = false;
 
-  private setPageData(page: PageData) {
+  private setPageData(page: PageData<M>) {
     const pages = this.pages.slice();
     const oldData = pages.find(p => p.page === page.page);
     if (oldData) {
@@ -336,7 +338,7 @@ export default class DDInfiniteScroll extends Vue {
   private async safeGetRequestResult(
     page: number,
     type: LoadingType,
-  ): Promise<RequestResult> {
+  ): Promise<RequestResult<M>> {
     let result = this.request({ page, type, scroll: this });
     if (isPromise(result)) result = await result;
     result && this.setPageData(result);

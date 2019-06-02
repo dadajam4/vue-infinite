@@ -13,14 +13,14 @@ export interface RequestTarget {
     type: LoadingType;
     scroll: DDInfiniteScroll;
 }
-export declare type RequestResult = PageData | void;
-export declare type DDInfiniteScrollRequest = (target: RequestTarget) => RequestResult;
-export interface PageData {
+export declare type RequestResult<M = any> = PageData<M> | void;
+export declare type DDInfiniteScrollRequest<M = any> = (target: RequestTarget) => RequestResult<M>;
+export interface PageData<M = any> {
     page: number;
-    data?: any;
+    data?: M;
     finished?: boolean;
 }
-export interface ComputedPageData extends PageData {
+export interface ComputedPageData<M = any> extends PageData<M> {
     active: boolean;
 }
 export interface LoadingScopedProps {
@@ -31,14 +31,14 @@ export interface LoadingScopedProps {
     value: boolean;
 }
 export declare const MIN_DEBOUNCE = 0;
-export default class DDInfiniteScroll extends Vue {
+export default class DDInfiniteScroll<M = any> extends Vue {
     $refs: {
         pages: DDInfinitePage[];
         prevLoading: DDInfiniteLoading;
         nextLoading: DDInfiniteLoading;
     };
     scroller: Scroller;
-    pages: PageData[];
+    pages: PageData<M>[];
     page: number;
     tag: string;
     pageTag?: string;
@@ -53,8 +53,8 @@ export default class DDInfiniteScroll extends Vue {
     pageJudgePosition: string | number;
     request: DDInfiniteScrollRequest;
     maxActivePage?: number | string;
-    readonly computedActivePages: ComputedPageData[];
-    readonly computedPages: ComputedPageData[];
+    readonly computedActivePages: ComputedPageData<M>[];
+    readonly computedPages: ComputedPageData<M>[];
     readonly computedMaxActivePage: number | undefined;
     readonly computedDebounce: DebounceDefine;
     finished: boolean;
@@ -70,7 +70,7 @@ export default class DDInfiniteScroll extends Vue {
     readonly computedPageJudgePosition: number;
     readonly hasPrevious: boolean;
     readonly paused: boolean;
-    pageAt(page: number): ComputedPageData | undefined;
+    pageAt(page: number): ComputedPageData<M> | undefined;
     private isDestroyed;
     private internalPage;
     private internalFinished;
